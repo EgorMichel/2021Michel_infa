@@ -26,6 +26,7 @@ for i in range(xy[0] // 2):
                 A[k] += a[t][k]
         for k in range(len(A)):
             A[k] /= 4
+        color = 0
 
         rect(screen, A, (i, j, 1, 1))
 
