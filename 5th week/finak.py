@@ -134,7 +134,6 @@ def click(eve, ball, sped):
             leaderboard.append(username[0] + ': \n')
         else:
             username[0] += eve.unicode
-        print(username[0])
     elif condition[2]:
         condition[0] = True
         times[0] = time.time()
@@ -170,7 +169,6 @@ def prints():
         
 
 fill_balls_and_speeds(5)
-print(balls)
 
 pygame.display.update()
 clock = pygame.time.Clock()
