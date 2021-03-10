@@ -98,7 +98,12 @@ def click(eve, ball, sped):
     :param sped: list of balls speed
     react to the current event
     '''
-    if condition[0]:
+    if not condition[0] and condition[1] and not event.type == pygame.MOUSEBUTTONDOWN:
+        if eve.key == pygame.K_ESCAPE:
+            condition[1] = False
+            username[0] = ''
+            condition[2] = False
+    elif condition[0]:
         for i in range(len(ball)):
             if ((eve.pos[0] - ball[i][0])**2 + (eve.pos[1] - ball[i][1])**2) < ball[i][2] * ball[i][2] \
                     and ball[i][4] < 70:
@@ -130,7 +135,7 @@ def click(eve, ball, sped):
         else:
             username[0] += eve.unicode
         print(username[0])
-    else:
+    elif condition[2]:
         condition[0] = True
         times[0] = time.time()
 
@@ -148,15 +153,20 @@ def prints():
     elif not condition[1] and not condition[0]:
         text = f1.render('Type ur name and press Enter to confirm. Then click to attempt to get 100 points',
                          True, (180, 0, 0))
+        text_best = f1.render('Best player - ' + leaderboard[1][:-1] + ' ' + leaderboard[2][:-1],
+                         True, (180, 0, 180))
         if not condition[2]:
-            text2 = f1.render(username[0], True, (250, 250, 250))
+            text_name = f1.render(username[0], True, (250, 250, 250))
         else:
-            text2 = f1.render(username[0], True, (250, 250, 0))
+            text_name = f1.render(username[0], True, (250, 250, 0))
         screen.blit(text, (90, 300))
-        screen.blit(text2, (90, 400))
+        screen.blit(text_best, (90, 500))
+        screen.blit(text_name, (90, 400))
     elif not condition[0] and condition[1]:
         text2 = f1.render('You got 100 points in ' + str(times[1]) + 'sec, why so slow? Try again?', True, (180, 0, 0))
+        text3 = f1.render("'esc' to go to the main menu", True, (180, 0, 0))
         screen.blit(text2, (90, 300))
+        screen.blit(text3, (90, 400))
         
 
 fill_balls_and_speeds(5)
