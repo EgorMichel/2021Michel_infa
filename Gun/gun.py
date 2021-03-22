@@ -36,6 +36,7 @@ class ball():
         self.live = 30
 
     def set_coords(self, dx=0.0, dy=0.0):
+        """Устанавливает координаты объекта"""
         canv.coords(
             self.id,
             self.x - self.r + dx,
@@ -51,7 +52,6 @@ class ball():
         self.x и self.y с учетом скоростей self.vx и self.vy, силы гравитации, действующей на мяч,
         и стен по краям окна (размер окна 800х600).
         """
-        # FIXME
         if self.x + self.vx > 800:
             self.vx = -1 * self.vx
         if self.y + self.vy > 600:
@@ -123,6 +123,7 @@ class gun():
                     )
 
     def power_up(self):
+        """Реализует увеличение энергии пушки"""
         if self.f2_on:
             if self.f2_power < 100:
                 self.f2_power += 1
@@ -160,6 +161,7 @@ class target():
         # canv.itemconfig(self.id_points, text=self.points)
 
     def move(self):
+        """Исполняет движение цели"""
         dx = randint(-10, 10)
         dy = randint(-20, 0)
         canv.coords(self.id,
@@ -179,6 +181,7 @@ balls = []
 
 
 def new_game(event=''):
+    """Главная функция игры. Реализует все взаимодействия объектов, реагирует на действия пользователя"""
     global gun, t1, t2, screen1, balls, bullet
     t1.new_target()
     t2.new_target()
